@@ -28,15 +28,15 @@ jobs:
 - job: ProdDeploy
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   steps:
-    - task: UseNode@1
-    - bash: 
-        npm install sfdx-cli --global
-      displayName: Install Salesforce CLI
     - task: DownloadSecureFile@1
       name: caCertificate
       displayName: 'Download CA certificate'
       inputs:
         secureFile: 'server.key'
+    - task: UseNode@1
+    - bash: 
+        npm install sfdx-cli --global
+      displayName: Install Salesforce CLI
     - bash: 
         sfdx force:auth:jwt:grant --clientid 3MVG9pe2TCoA1Pf4wIHx0GJMAbbbdxowbboR5uCeI6CwYuTdy.JaJrtXpke7z1Rst9DK8hR62j3XtAT4OLJT0 --jwtkeyfile server.key --username sahil@mirketa.com --instanceurl https://login.salesforce.com -a prod
       displayName: Authorize salesforce org
