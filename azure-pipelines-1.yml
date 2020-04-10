@@ -38,7 +38,7 @@ jobs:
         npm install sfdx-cli --global
       displayName: Install Salesforce CLI
     - bash: 
-        sfdx force:auth:jwt:grant --clientid 3MVG9pe2TCoA1Pf4wIHx0GJMAbbbdxowbboR5uCeI6CwYuTdy.JaJrtXpke7z1Rst9DK8hR62j3XtAT4OLJT0 --jwtkeyfile server.key --username sahil@mirketa.com --instanceurl https://login.salesforce.com -a prod
+        sfdx force:auth:jwt:grant --clientid 3MVG9pe2TCoA1Pf4wIHx0GJMAbbbdxowbboR5uCeI6CwYuTdy.JaJrtXpke7z1Rst9DK8hR62j3XtAT4OLJT0 --jwtkeyfile $(caCertificate.secureFilePath) --username sahil@mirketa.com --instanceurl https://login.salesforce.com -a prod
       displayName: Authorize salesforce org
     - bash: 
         sfdx force:source:convert -d ./src
